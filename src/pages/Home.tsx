@@ -1,14 +1,17 @@
 import { FormSearch } from '../components';
-import { HandHelping } from 'lucide-react';
+import { HandHelping, Landmark } from 'lucide-react';
 import { AllThemesView, SearchThemeView } from '../views';
 
 function Home() {
   return (
     <main className='min-h-screen w-full items-center justify-center px-32'>
-      <section className='flex flex-col min-h-48 mt-32'>
-        <h1 className=' text-5xl font-semibold text-start self-start'>
-          Temáticas importantes <br /> de Teoría Polítca
-        </h1>
+      <section className='flex flex-col mt-32'>
+        <div className='flex flex-1 flex-row items-stretch'>
+          <h1 className=' text-5xl w-full font-semibold text-start self-start'>
+            Temáticas importantes <br /> de Teoría Polítca
+          </h1>
+          <Landmark className='w-28 h-28'/>
+        </div>
         <FormSearch/>
       </section>
       

@@ -1,25 +1,39 @@
-import { Form, Formik } from "formik";
+import { NavLink } from "react-router-dom";
 import { Search } from "lucide-react";
+import { useForm, useSearch } from "../hooks";
 import TextInput from "./TextInput";
 
 function FormSearch() {
+  const { search, onInputChange } = useForm({ search: '' });
+  const { listSearch } = useSearch({search});
 
   return (
-    <Formik initialValues={{ search: "" }} onSubmit={() => {}}>
-          {() => (
-            <Form className='mt-6'>
-              <div>
-                <TextInput 
-                  type='text' 
-                  name='search' 
-                  placeholder='Introduce aquí el título de la temática'
-                  >
-                  <Search color='#fff'/>
-                </TextInput>
-              </div>
-            </Form>
-          )}
-    </Formik>
+    <form className='mt-6'>
+      <div>
+        <TextInput 
+          type='text' 
+          name='search'
+          value={search}
+          autoComplete='off'
+          onChange={onInputChange}
+          placeholder='Introduce aquí el título de la temática'
+          >
+          <Search color='#fff'/>
+        </TextInput>
+        {
+          search &&
+          <ul className="flex flex-col gap-4 p-4 mt-2 items-start rounded-lg bg-gray-500 bg-opacity-20">
+            {
+              listSearch.map((list) => (
+                <li key={list}>
+                  <NavLink to={`/${list}`} className='hover:text-amber-300'>{list}</NavLink>
+                </li>
+              ))
+            }
+          </ul>
+        }
+      </div>
+    </form>
   )
 }
 

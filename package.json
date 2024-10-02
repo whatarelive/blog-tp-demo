@@ -11,7 +11,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "formik": "^2.4.6",
     "lucide-react": "^0.447.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
