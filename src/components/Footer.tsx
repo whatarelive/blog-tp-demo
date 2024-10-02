@@ -10,7 +10,7 @@ function Footer() {
         </div>
         <div className="flex flex-row">
             <Github className="mx-3"/>
-            <NavLink to={""} className='hover:text-amber-300' >
+            <NavLink to={"https://github.com/whatarelive/blog-tp-demo"} className='hover:text-amber-300' >
                 Ver proyecto en Github
             </NavLink>
         </div>
