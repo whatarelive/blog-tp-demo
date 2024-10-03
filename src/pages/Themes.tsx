@@ -14,26 +14,26 @@ function Themes() {
   if (!subtheme) return <Navigate to={'/'}/>
 
   return (
-    <main className='min-h-screen w-full items-center justify-center px-32'>
-      <section className='flex flex-col min-h-48 mt-32'>
-        <div className="flex flex-row">
+    <main className='min-h-screen w-full items-center justify-center p-8 lg:px-32'>
+      <section className='flex flex-col min-h-48 mt-2 lg:mt-32'>
+        <div className="flex flex-col lg:flex-row">
           <div 
             className="flex flex-1 flex-row hover:text-amber-300 cursor-pointer"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
           >
             <ArrowLeft className="mx-3"/>
             <span>Regresar a inicio</span>
           </div>
-          <h1 className='text-xl font-semibold self-end'>
+          <h1 className='text-xl font-semibold self-end mt-14 text-start'>
             Temáticas importantes de Teoría Polítca
           </h1>
         </div>
         <FormSearch/>
       </section>
-      <section className='flex flex-1 flex-col items-center justify-center'>
-        <h3 className="text-3xl font-semibold text-opacity-50">
+      <section className='flex flex-1 flex-col items-center justify-center mt-12 lg:mt-16'>
+        <h3 className="text-lg lg:text-3xl font-bold lg:font-semibold text-opacity-50">
           {subtheme.title}
-          <hr />
+          <hr className="mt-4"/>
         </h3>
         <p className="mt-8 text-start">
           {subtheme.description}

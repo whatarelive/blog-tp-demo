@@ -18,7 +18,7 @@ function FormSearch() {
           onChange={onInputChange}
           placeholder='Introduce aquí el título de la temática'
           >
-          <Search color='#fff'/>
+          <Search className="w-4 h-5" color='#fff'/>
         </TextInput>
         {
           search &&
@@ -26,7 +26,7 @@ function FormSearch() {
             {
               listSearch.map((list) => (
                 <li key={list}>
-                  <NavLink to={`/${list}`} className='hover:text-amber-300'>{list}</NavLink>
+                  <NavLink to={`/${list}`} className='flex text-start hover:text-amber-300'>{list}</NavLink>
                 </li>
               ))
             }
