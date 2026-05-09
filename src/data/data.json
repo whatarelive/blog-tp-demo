@@ -1,0 +1,76 @@
+@startuml
+!theme plain
+title Diagrama de Despliegue - Módulo de Gestión de Misiones (CITMA)
+
+' === Nodo Cliente ===
+node "Nodo Cliente" as CLIENTE <<dispositivo>> {
+    artifact "Navegador Web" as NAVEGADOR <<browser>>
+    artifact "Estación de trabajo DRI" as WORKSTATION
+}
+
+' === Nodo Servidor de Aplicaciones (Docker Host) ===
+node "Servidor de Aplicaciones\n(Docker Host)" as DOCKER_HOST <<servidor>> {
+    
+    rectangle "Entorno Docker" as DOCKER_ENV {
+        
+        ' Contenedor Frontend
+        component "Contenedor Frontend" as FRONTEND <<contenedor>> {
+            artifact "Next.js 16.2.4" as NEXTJS
+            artifact "SSR (Server Side Rendering)" as SSR
+        }
+        
+        ' Contenedor Backend
+        component "Contenedor Backend" as BACKEND <<contenedor>> {
+            artifact "Django REST Framework" as DRF
+            artifact "Lógica de negocio" as LOGICA
+            artifact "Seguridad por roles" as SEGURIDAD
+            artifact "Flujo de documentos (RST, RSTP)" as FLUJO
+        }
+        
+        ' Contenedor Base de Datos
+        component "Contenedor Base de Datos" as DB <<contenedor>> {
+            artifact "PostgreSQL" as POSTGRES
+            artifact "Datos sensibles" as DATOS
+        }
+    }
+}
+
+' === Red Bridge Interna (Docker) ===
+rectangle "Red Interna Bridge (docker0)" as BRIDGE_NET {
+    note right of BRIDGE_NET
+        Comunicación privada
+        Puerto 5432 (PostgreSQL)
+        Sin exposición externa
+    end note
+}
+
+' === Comunicaciones ===
+' Cliente -> Frontend (HTTPS)
+CLIENTE --> DOCKER_HOST : HTTPS / TCP/IP
+
+' Conexiones dentro del Docker Host (Bridge)
+FRONTEND -[#green]-> BACKEND : Peticiones asíncronas\n(API REST / HTTP)
+BACKEND -[#green]-> DB : TCP/IP\nPuerto 5432\n(Bridge interno)
+
+' === Estereotipos y anotaciones visuales ===
+note top of CLIENTE
+    Especialistas de la Dirección
+    de Relaciones Internacionales (DRI)
+end note
+
+note top of FRONTEND
+    Renderizado del lado del servidor (SSR)
+    Mejora velocidad en red corporativa
+end note
+
+note top of BACKEND
+    Expone endpoints REST
+    Coordina flujo de documentos legales
+end note
+
+note top of DB
+    Aislado en red interna Docker
+    Protege integridad de datos
+end note
+
+@enduml
